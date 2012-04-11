@@ -102,6 +102,8 @@ instance Evaluable SimpleExpr where
 		substitute e name val =
 			case e of
 				SimpleVariable s -> if name == s then SimpleConstant val else SimpleVariable s
+				SimpleOneArg t ex -> SimpleOneArg t $ substitute ex name val
+				SimpleTwoArg t ex1 ex2 -> SimpleTwoArg t  (substitute ex1 name val) $ substitute ex2 name val
 				x -> x
 
 instance Evaluable ComplexExpr where
