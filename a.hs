@@ -66,12 +66,16 @@ data SimpleExpr =
 data ComplexExpr =
 	Constant Integer |
 	Variable String |
+	NumberedVariable String Integer| --liczba z indeksem
 	OneArg OneArgType ComplexExpr |
 	TwoArg TwoArgType ComplexExpr ComplexExpr |
-	Sum String Integer Integer ComplexExpr
-	--Prod
+	Sum String ComplexExpr ComplexExpr ComplexExpr|
+	Prod String ComplexExpr ComplexExpr ComplexExpr|
+	BigSum {baseIndex::String, numOfSum::String, howMany::ComplexExpr, bottomEnd::ComplexExpr, topEnd::ComplexExpr, underExpr::ComplexExpr}|
+{--SUMY ZE ZMIENNA LICZBA SIGM
+Argumenty: baseIndex-podstawowa nazwa indeksu, numOfSum-nazwa zmiennej okreslajacej numer sumy, nieuzywana przy wyswietlaniu, howMany-ile sum,bottomEnd, topEnd-konce przedzialow sumowania (wyrazenia te moga zawierac Variable numOfSum), underExpr-wyrazenie pod suma (moze zawierac NumberedVariable baseIndex a, gdzie 1<=a<=howMany--}
+	BigProd {baseIndex::String, numOfProd::String, howMany::ComplexExpr, bottomEnd::ComplexExpr, topEnd::ComplexExpr, underExpr::ComplexExpr}
 	--todo: bardziej zawansowane iteracjie niz prosty range, np: po parzystych
-	--todo: sumy ze zmienna liczba sigm
 
 instance Evaluable SimpleExpr where
 	getValue expr = case expr of
