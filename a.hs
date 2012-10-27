@@ -69,12 +69,12 @@ data ComplexExpr =
 	NumberedVariable String Integer| --liczba z indeksem
 	OneArg OneArgType ComplexExpr |
 	TwoArg TwoArgType ComplexExpr ComplexExpr |
-	Sum String ComplexExpr ComplexExpr ComplexExpr|
-	Prod String ComplexExpr ComplexExpr ComplexExpr|
-	BigSum {baseIndex::String, numOfSum::String, howMany::ComplexExpr, bottomEnd::ComplexExpr, topEnd::ComplexExpr, underExpr::ComplexExpr}|
+	Sum String SimpleExpr SimpleExpr ComplexExpr|
+	Prod String SimpleExpr SimpleExpr ComplexExpr|
+	BigSum {baseIndex::String, numOfSum::String, howMany::SimpleExpr, bottomEnd::SimpleExpr, topEnd::SimpleExpr, underExpr::ComplexExpr}|
 {--SUMY ZE ZMIENNA LICZBA SIGM
-Argumenty: baseIndex-podstawowa nazwa indeksu, numOfSum-nazwa zmiennej okreslajacej numer sumy, nieuzywana przy wyswietlaniu, howMany-ile sum,bottomEnd, topEnd-konce przedzialow sumowania (wyrazenia te moga zawierac Variable numOfSum), underExpr-wyrazenie pod suma (moze zawierac NumberedVariable baseIndex a, gdzie 1<=a<=howMany--}
-	BigProd {baseIndex::String, numOfProd::String, howMany::ComplexExpr, bottomEnd::ComplexExpr, topEnd::ComplexExpr, underExpr::ComplexExpr}
+Argumenty: baseIndex-podstawowa nazwa indeksu, numOfSum-nazwa zmiennej okreslajacej numer sumy, nieuzywana przy wyswietlaniu, howMany-ile sum, bottomEnd, topEnd-konce przedzialow sumowania (wyrazenia te moga zawierac Variable numOfSum), underExpr-wyrazenie pod suma (moze zawierac NumberedVariable baseIndex a, gdzie 1<=a<=howMany--}
+	BigProd {baseIndex::String, numOfProd::String, howMany::SimpleExpr, bottomEnd::SimpleExpr, topEnd::SimpleExpr, underExpr::ComplexExpr}
 	--todo: bardziej zawansowane iteracjie niz prosty range, np: po parzystych
 
 instance Evaluable SimpleExpr where
